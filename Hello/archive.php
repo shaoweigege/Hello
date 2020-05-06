@@ -33,7 +33,7 @@ class Typecho_Widget_Helper_PageNavigator_Classic extends Typecho_Widget_Helper_
 <?php $this->need('header.php'); ?>
 <div class="archive">
     <div class="wt-100" id="main" role="main">
-	    <h3 class="archive-title">
+	    <h3 class="archive-title" style="display:none;"> 
 	        <?php $this->archiveTitle(array(
 	            'category'  =>  _t('%s'),
 	            'search'    =>  _t('包含关键字 %s 的文章'),

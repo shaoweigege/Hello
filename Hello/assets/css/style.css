@@ -734,6 +734,7 @@ button,select {
 	margin: 0 auto;
 	max-width: 95%;
 	margin-bottom: 1rem;
+	border:1px solid rgba(128, 128, 128, 0.72);
 }
 
 .flex-right {
@@ -1698,7 +1699,7 @@ hr {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-	background-color: #121f64b5;
+	background-color: rgba(18, 31, 100, 0.71);
 	border: 1px solid transparent;
 	padding: .45rem .9rem;
 	font-size: .875rem;
@@ -2253,6 +2254,28 @@ span.sitename {
 	width: 1.2rem;
 }
 
+table {
+    width: 100%;
+    border: 1px solid #e1e1e1;
+    border-collapse: collapse;
+    table-layout:fixed;
+}
+table thead {
+    background-color: #f7f7f7;
+}
+table th,table td {
+    color: #eee;
+    padding: .5rem;
+    border: 1px solid #e1e1e1;
+    word-wrap:break-word;
+}
+table tr {
+    transition: background-color .3s;
+}
+table tr:hover {
+    background-color: grey;
+}
+
 #m-cover-box {
 	margin-top: -32px;
 }
@@ -2460,6 +2483,7 @@ span.sitename {
 	.layout_page {
 		max-width: 100%;
 		margin-top: 30px;
+		border: none;
 	}
 
 	.top {

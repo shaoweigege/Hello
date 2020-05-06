@@ -50,7 +50,7 @@
 
 </head>
 
-<body id="ty01" style="background: url(<?php $this->options->bgimg(); ?>) no-repeat center center fixed;">
+<body id="ty01" style="background: url(<?php $this->options->bgimg(); ?>) center center fixed;">
 <header id="header" class="clearfix">
 	<div class="head hcenter" id="head">
 		<div class="headnav">
