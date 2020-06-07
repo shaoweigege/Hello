@@ -67,7 +67,7 @@
 						<div class="hot-content">
 							<a class=" h-2x" href="#"><span class="htitle"><?php $hot->title();?></span></a>
 							<div class="hot-time">
-								<span>2019-09-21</span>
+								<span><?php echo $hot->date(); ?></php></span>
 							</div>
 						</div>
 

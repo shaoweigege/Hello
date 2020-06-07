@@ -36,7 +36,7 @@ $this->need('header.php');?>
 				<?php $imgs = array_filter(explode("$",$talk['talk_media']));
 					$img_num = count($imgs); if($img_num == 1){$width = "100%";$height = "250px";}elseif($img_num == 2){$width = "50%";$height = "260px";}else{$width = "33.33%";$height = "260px";}?>
 				<?php foreach ($imgs as $img): ?>
-					<div class="img-ctrl"  style="width:<?php echo $width; ?>;" ><img class="wt-100"src="<?php echo $img; ?>"/></div>
+					<div class="img-ctrl"  style="width:<?php echo $width; ?>;" ><img class="wt-100 talk_img_height" src="<?php echo $img; ?>"/></div>
 				<?php endforeach; ?>
 				</div>
 			</div>

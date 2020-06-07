@@ -1,9 +1,8 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <?php $this->need('header.php'); ?>
 <!--自定义不同分类文章样式-->
-<?php if($this->category == "gallery"): ?><?php $this->need('post_style/gallery.php'); 
-
-?>
+<?php if($this->category == "gallery"): ?><?php $this->need('post_style/gallery.php'); ?>
+<?php elseif($this->category == "videos"): ?><?php $this->need('post_style/videos.php'); ?>
 <?php else: ?>
 <div id="im-cover-box">
 			<div class="flexslider wh-100">
@@ -57,7 +56,9 @@
 	        </ul>
 	        <hr class="clearfix">
 	        <div class="tem markdown-body"><?php if($this->fields->indent == 'Yes'): ?>
-	        	<div class="post-content tem" itemprop="articleBody"><?php $this->content(); ?></div>
+	        	<div class="post-content tem" itemprop="articleBody">
+	        	    <?php $this->content(); ?>
+	        	</div>
 	        	<?php else: ?><div class="post-content distem" itemprop="articleBody"><?php $this->content(); ?></div><?php endif; ?>
 	        	<script>
 					var imgs = document.getElementsByClassName("post-content")[0].getElementsByTagName("img");

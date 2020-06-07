@@ -75,8 +75,9 @@ function themeConfig($form) {
     ,_t('是否显示代码行号,默认显示'),_t(''));
     $form->addInput($linenumber);
  
-	$tongji = new Typecho_Widget_Helper_Form_Element_Textarea('tongji', NULL, NULL, _t('百度统计代码'), _t(''));
+	$tongji = new Typecho_Widget_Helper_Form_Element_Textarea('tongji', NULL, NULL, _t('百度或谷歌统计代码'), _t(''));
     $form->addInput($tongji);
+    
 
 
 }
@@ -91,17 +92,21 @@ function themeFields($layout) {
     ,_t('是否开启自动缩进'),_t('开启后文章段首自动缩进2字符'));
     $layout->addItem($indent);
     
-    $cover = new Typecho_Widget_Helper_Form_Element_Text('cover', NULL, NULL, _t('封面'), _t('请填入文章封面图片地址,不输入则随机使用默认封面'));
+    $cover = new Typecho_Widget_Helper_Form_Element_Text('cover', NULL, NULL, _t('封面'), _t('请填入封面图片地址,不输入则随机使用默认封面'));
     $cover->input->setAttribute('class', 'w-100');
     $layout->addItem($cover);
     
-    $summary = new Typecho_Widget_Helper_Form_Element_Textarea('summary', NULL, NULL, _t('描述'), _t('此处输入文章、相册、影视描述'));
+    $summary = new Typecho_Widget_Helper_Form_Element_Textarea('summary', NULL, NULL, _t('描述'), _t('此处输入文章、相册或者影视描述'));
     $summary->input->setAttribute('style', 'width:100%;height:100px;');
     $layout->addItem($summary);
   
 	$keyword = new Typecho_Widget_Helper_Form_Element_Text('keyword', NULL, NULL, _t('关键词'), _t('请输入文章关键词'));
     $keyword->input->setAttribute('class', 'w-100');
     $layout->addItem($keyword);  
+    
+    $videos = new Typecho_Widget_Helper_Form_Element_Textarea('videos', NULL, NULL, _t('视频列表'), _t('请输入视频链接，示例：<p style="color:red;">第一集$https://xxx.mp4</p>'));
+    $videos->input->setAttribute('class', 'w-100');
+    $layout->addItem($videos);  
     
     
 }

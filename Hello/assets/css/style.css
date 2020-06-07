@@ -13,7 +13,7 @@ body {
 	margin: 0;
 	padding: 0;
 	color: #444;
-	font-family: "Droid Serif",Georgia,"Times New Roman","PingFang SC","Hiragino Sans GB","Source Han Sans CN","WenQuanYi Micro Hei","Microsoft Yahei",serif;
+	/*font-family: "Droid Serif",Georgia,"Times New Roman","PingFang SC","Hiragino Sans GB","Source Han Sans CN","WenQuanYi Micro Hei","Microsoft Yahei",serif;*/
 	font-size: 14px;
 	-webkit-tap-highlight-color: rgba(255,255,255,0);
 	-moz-user-focus: none;
@@ -348,7 +348,34 @@ button {
 button,select {
 	text-transform: none;
 }
+.button {
+	display: block;
+    user-select: none;
+    background: #202020;
+    background-image: -webkit-linear-gradient(top, #33bdef, #019ad2);
+    background-image: -moz-linear-gradient(top, #33bdef, #019ad2);
+    background-image: -ms-linear-gradient(top, #33bdef, #019ad2);
+    background-image: -o-linear-gradient(top, #33bdef, #019ad2);
+    background-image: linear-gradient(to bottom, #31393c, #171717);
+    -webkit-border-radius: 6;
+    -moz-border-radius: 6;
+    border-radius: 6px;
+    text-shadow: 0px -1px 0px #5b6178;
+    -webkit-box-shadow: 0px 1px 0px 0px #f0f7fa;
+    -moz-box-shadow: 0px 1px 0px 0px #f0f7fa;
+    box-shadow: 0px 1px 0px 0px #6c6e6f;
+    font-family: Arial;
+    color: #ddd;
+    padding: 5px;
+    border: solid #0b2638 1px;
+    text-decoration: none;
+}
 
+.button:hover {
+  color: #ffffff;
+  background: #646f73;
+  text-decoration: none;
+}
 #m_search button.submit {
 	border: none;
 	outline: none;
@@ -734,7 +761,7 @@ button,select {
 	margin: 0 auto;
 	max-width: 95%;
 	margin-bottom: 1rem;
-	border:1px solid rgba(128, 128, 128, 0.72);
+	border: 1px solid rgba(128, 128, 128, 0.18);
 }
 
 .flex-right {
@@ -1302,6 +1329,7 @@ button,select {
 	color: #eee;
 	height: 6.2rem;
 	margin: 1rem 1.5rem 0 1.5rem;
+	font-size: 0.9rem;
 	text-indent: 2em;
 	line-height: 2rem;
 	overflow: hidden;
@@ -1315,7 +1343,6 @@ button,select {
 	color: #bbb;
 	float: right;
 	margin: 10px 1.5rem;
-	font-size: 1rem;
 	height: 100%;
 }
 
@@ -1876,7 +1903,11 @@ hr {
 	text-indent: 2em;
 	line-height: 1.5rem;
 }
-
+.v-summary {
+	padding: 1rem 0;
+	text-indent: 2em;
+	line-height: 1.5rem;
+}
 .a-bottom {
 	border-top: 1px #ebe9e824 solid;
 	color: #f3e8e8a8;
@@ -1976,19 +2007,19 @@ hr {
 }
 
 .g-day {
-	position: absolute;
-	left: calc(-2.1rem - 2px);
-	top: calc(50px - 0.6rem);
-	width: 1rem;
-	height: 1rem;
-	border: 0.2rem solid #49b1f5;
-	border-radius: 0.3rem;
-	background: #e7dc10;
-	content: '';
-	color: #08151d;
-	line-height: 1rem;
-	display: block;
-	text-align: center;
+    position: absolute;
+    left: calc(-2.2rem - 2px);
+    top: calc(50px - 0.7rem);
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 0.2rem solid #49b1f5;
+    border-radius: 0.3rem;
+    background: #e7dc10;
+    content: '';
+    color: #08151d;
+    line-height: 1rem;
+    display: block;
+    text-align: center;
 }
 
 .g-item:hover .g-day {
@@ -2222,7 +2253,7 @@ span.sitename {
 }
 
 .talk-img img {
-	width: calc(100% - 1rem);
+	width: calc(100% - 10px);
 	max-height: 400px;
 }
 
@@ -2315,6 +2346,60 @@ table tr:hover {
 	padding: 5px;
 }
 
+
+.v-list li{
+	display: block;
+	width: 50%;
+	float: left;
+}
+.v-list li span{
+	margin:0 0.5rem;
+}
+.v-list-box {
+	 border-top: 1px solid #4a4646;
+	 padding-bottom: 1rem;
+}
+.v-cover {
+    height: 200px;
+    width: auto;
+    margin: 1rem;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    display: block;
+    background-size: cover;
+    border-radius: 5px;
+}
+.scroll_wrap {
+    zoom: 1;
+    -webkit-overflow-scrolling: touch;
+    -ms-flex: 1;
+    -webkit-flex: 1;
+    scrollbar-base-color: #222225;
+    scrollbar-face-color: #555;
+    scrollbar-arrow-color: #000;
+    scrollbar-3dlight-color: #555;
+    scrollbar-highlight-color: #555;
+    scrollbar-shadow-color: #555;
+    scrollbar-darkshadow-color: #555;
+    scrollbar-track-color: #333338;
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    position: relative;
+    flex: 1;
+    max-height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: #444;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: grey;
+}
 @media screen and (min-width:487px) {
 	.card-image img {
 		height: 300px;
@@ -2397,6 +2482,9 @@ table tr:hover {
 @media screen and (max-width:767px) {
 	html {
 		font-size: 14px;
+	}
+	.talk_img_height{
+		height: 120px;
 	}
 
 	.post-title {
@@ -2624,6 +2712,9 @@ z
 @media screen and (min-width:768px) {
 	.m_nav {
 		display: none;
+	}
+	.talk_img_height{
+		height: 300px;
 	}
 
 	.m_side {

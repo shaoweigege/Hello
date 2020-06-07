@@ -2,7 +2,6 @@ console.log('%c 生命不息，折腾不止  南玖博客：https://ztongyang.cn
 
 console.log('%c 堂下何人，偷看控制台乃是重罪，你可知罪！','color: red; background: #fff; padding:5px;font-size:20px;');
 
-
 console.log("%c ", "background: url(https://s1.ax1x.com/2020/03/15/81OneI.png) no-repeat;padding-left:640px;padding-bottom: 242px;")
 
 
@@ -220,8 +219,12 @@ function extend(obj) {
 	}
 }
 
-
-
+// 视频播放切换
+$(".play").on('click',function(){
+	var spurl = $(this).attr('data-url');
+	$("#dplayer").attr("play-url",spurl);
+	sw();
+}) 
 
 
 
