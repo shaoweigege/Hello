@@ -1,4 +1,6 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
+<link rel="stylesheet" href="<?php $this->options->themeUrl('assets/OwO/OwO.min.css'); ?>">
+
 <?php function threadedComments($comments, $options) {
     $commentClass = '';$sf="<i class=\"mdi mdi-account-outline\"></i> 游客";
     if ($comments->authorId) {
@@ -24,7 +26,7 @@
 		</p>
 	</div>
 	<div class="cot-content">
-<?php $cots=$comments->content;$cots = preg_replace('#<a(.*?) href="([^"]*/)?(([^"/]*)\.[^"]*)"(.*?)>#','<a$1 href="$2$3"$5 target="_blank" rel="nofollow">', $cots);echo get_comment_at($comments->coid).$cots;?>
+<?php $cots=parseBiaoQing($comments->content);$cots = preg_replace('#<a(.*?) href="([^"]*/)?(([^"/]*)\.[^"]*)"(.*?)>#','<a$1 href="$2$3"$5 target="_blank" rel="nofollow">', $cots);echo get_comment_at($comments->coid).$cots;?>
 	</div>
 <div id="<?php $comments->theId(); ?>" class="mt-1"></div>
 </div>
@@ -43,14 +45,25 @@
     	<h3 id="response"><?php _e('说些什么吧'); ?></h3>
     	<form method="post" action="<?php $this->commentUrl() ?>" id="comment-form" role="form">
 			<div class="comment-row">
-		    	<div class="comment-col"> <div class="comment-form-group"> <input type="text" name="author" maxlength="12" id="author" class="form-control" placeholder="称呼*" value="<?php $this->remember('author'); ?>" required=""> </div>
+			    <?php if($this->user->hasLogin()): ?>
+			    <div class="comment-col"> <div class="comment-form-group"> <input type="text" name="author" maxlength="12" id="author" class="form-control" placeholder="称呼*" value="<?php $this->user->screenName(); ?>" required=""> </div>
 		        </div> 
-		        <div class="comment-col"> <div class="comment-form-group"> <input type="email" name="mail" id="mail" class="form-control" placeholder="电子邮箱 *" value="<?php $this->remember('mail'); ?>" <?php if ($this->options->commentsRequireMail): ?> class="required"<?php endif; ?>> </div> 
+		        <div class="comment-col"> <div class="comment-form-group"> <input type="email" name="mail" id="mail" class="form-control" placeholder="电子邮箱 *" value="<?php $this->user->mail(); ?>" <?php if ($this->options->commentsRequireMail): ?> class="required"<?php endif; ?>> </div> 
+		        </div> 
+		        <div class="comment-col"> <div class="comment-form-group"> <input type="url" name="url" id="url" class="form-control" placeholder="网址(http://)" value="<?php $this->options->siteUrl(); ?>" <?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?>>  </div> 
+		        </div> 
+		        <?php else: ?>
+		        <div class="comment-col"> <div class="comment-form-group"> <input type="text" name="author" maxlength="12" id="author" class="form-control" placeholder="称呼*" value="<?php $this->remember('author'); ?>" required=""> </div>
+		        </div> 
+		         <div class="comment-col"> <div class="comment-form-group"> <input type="email" name="mail" id="mail" class="form-control" placeholder="电子邮箱 *" value="<?php $this->remember('mail'); ?>" <?php if ($this->options->commentsRequireMail): ?> class="required"<?php endif; ?>> </div> 
 		        </div> 
 		        <div class="comment-col"> <div class="comment-form-group"> <input type="url" name="url" id="url" class="form-control" placeholder="网址(http://)" value="<?php $this->remember('url'); ?>" <?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?>>  </div> 
 		        </div> 
+
+		        <?php endif;?>
+
 		    </div>
-		    <div class="comment-content"><textarea class="form-textarea form-control-light mb-2 " name="text" placeholder="说些什么吧..." id="example-textarea" rows="5" required=""><?php $this->remember('text'); ?></textarea></div>
+		    <div class="comment-content"><textarea class="form-textarea form-control-light mb-2 OwO-textarea" name="text" placeholder="说些什么吧..." id="example-textarea" rows="5" required=""><?php $this->remember('text'); ?></textarea></div>
 		        <div class="comment-bottom">
 					<a href="javascript: void(0);"class="btn btn-primary OwO-logo" rel="external nofollow">OwO</a>
 					<div class="float-right">
@@ -58,6 +71,7 @@
 							<button type="submit" class="btn btn-primary btn-sm submit" id="misubmit">提交</button>
 						</div>
 					</div>
+				<div class="OwO"></div>
     	</form>
     </div>
     <?php else: ?>
@@ -69,3 +83,4 @@
     <?php $comments->pageNav('&laquo; 前一页', '后一页 &raquo;'); ?>
     <?php endif; ?>
 </div>
+<script src="<?php $this->options->themeUrl('assets/OwO/OwO.min.js'); ?>"></script>

@@ -17,7 +17,7 @@ function themeConfig($form) {
     $settime = new Typecho_Widget_Helper_Form_Element_Text('settime', NULL, date("Y-m-d H:i:s",time()), _t('自定义建站时间'), _t('用于统计网站运行时间，格式：2019-07-25 22:13:04'));
     $form->addInput($settime);
     
-    $coverimg = new Typecho_Widget_Helper_Form_Element_Text('coverimg', NULL, 'http://metu.ztongyang.cn/meitu/7.jpg', _t('首页默认封面'), _t(''));
+    $coverimg = new Typecho_Widget_Helper_Form_Element_Text('coverimg', NULL, 'https://metu.ztongyang.cn/hello/212112-1551792072f791.jpg-yasuo', _t('首页默认封面'), _t(''));
     $form->addInput($coverimg);
     
     $subtitle = new Typecho_Widget_Helper_Form_Element_Text('subtitle', NULL, 'Just So So ...', _t('站点副标题'), _t(''));
@@ -35,7 +35,7 @@ function themeConfig($form) {
 	$banner = new Typecho_Widget_Helper_Form_Element_Text('banner', NULL, NULL, _t('首页轮播图文章设置'), _t('请填写需要在首页轮播展示的文章cid,以英文逗号分隔'));
     $form->addInput($banner);
     
-	$bgimg = new Typecho_Widget_Helper_Form_Element_Text('bgimg', NULL, NULL, _t('网站背景图'), _t('建议填写，留空影响美观'));
+	$bgimg = new Typecho_Widget_Helper_Form_Element_Text('bgimg', NULL, 'http://metu.ztongyang.cn/typecho/prism.png', _t('网站背景图'), _t('建议填写，留空影响美观'));
     $form->addInput($bgimg);
     
     $wechatqrcode = new Typecho_Widget_Helper_Form_Element_Text('wechatqrcode', NULL, NULL, _t('微信二维码地址'), _t('显示在侧栏关于博主处'));
@@ -55,10 +55,22 @@ function themeConfig($form) {
     'No' => _t('否')),'No' 
     ,_t('全站灰白'),_t('用于特殊节日(哀悼日等)，开启全站灰白，表以哀思'));
     $form->addInput($sad);
-    
-    $beian = new Typecho_Widget_Helper_Form_Element_Text('beian', NULL, NULL, _t('网站备案号'), _t('在页脚展示'));
+     
+    $beian = new Typecho_Widget_Helper_Form_Element_Text('beian', NULL, "天朝通行证", _t('网站备案号'), _t('在页脚展示'));
     $form->addInput($beian);
-      
+    
+    $eruda = new Typecho_Widget_Helper_Form_Element_Radio('eruda', 
+    array('Yes' => _t('是'),
+    'No' => _t('否')),'No' 
+    ,_t('是否开启移动端网页调试'),_t('打开后可实现在移动端捕获 console 日志、检查元素状态、捕获XHR请求、显示本地存储和 Cookie 信息等'));
+    $form->addInput($eruda);
+    
+    $lazyload = new Typecho_Widget_Helper_Form_Element_Radio('lazyload', 
+    array('Yes' => _t('是'),
+    'No' => _t('否')),'Yes' ,_t('是否开启图片懒加载'),_t('建议开启，开启后增强用户体验，减少http的请求，减少服务器端压力'));
+    $form->addInput($lazyload);
+    
+    
 	$HLstyle = new Typecho_Widget_Helper_Form_Element_Radio('HLstyle', 
     array('dark' => _t('dark'),
     'okaikia' => _t('okaikia'),
@@ -321,10 +333,10 @@ class Widget_Post_hot extends Widget_Abstract_Contents
 
 // 文章封面
 function showCover($widget){
-	if(!empty($widget->fields->cover)){
+	if(($widget->fields->cover)){
 		$img=$widget->fields->cover;
 	}else{
-		$img = 'http://metu.ztongyang.cn/meitu/7.jpg';
+		$img = 'https://metu.ztongyang.cn/hello/212112-1551792072f791.jpg';
 	}
 	return $img;
 }
@@ -332,7 +344,7 @@ function showCover($widget){
 // 文章描述
 function showSummary($widget){
 	$cover_arr = array();
-	if(!empty($widget->fields->summary)){
+	if(($widget->fields->summary)){
 		$summary=$widget->fields->summary;
 		$tem = 1;
 		array_push($cover_arr,$tem,$summary);
@@ -435,9 +447,23 @@ function tx($mail,$id=0){
 		$g='//q.qlogo.cn/g?b=qq&nk='.$f.'&s=100';
 	}else{
 		$g=$b.$d.'?d=mm';
+        // $g=getrdqq(10);
 	}
 	echo $g;
 }
+
+// 随机QQ生成
+function getrdqq($num){
+	$qq="";
+	for($i=0;$i<$num;$i++){
+		$qq.=strval(rand(0, 9));
+	}
+	$radavatar = 'http://q.qlogo.cn/g?b=qq&nk='.$qq.'&s=100';
+	return $radavatar;
+}	
+
+
+
 
 	
 /** 获取操作系统信息 */
@@ -449,17 +475,17 @@ function getOs($agent)
         if (preg_match('/nt 6.0/i', $agent)) {
             $os = '<i class="mdi mdi-windows-classic"></i> WindowsVista';
         } else if (preg_match('/nt 6.1/i', $agent)) {
-            $os = '<i class="mdi mdi-windows"></i> Windows7';
+            $os = '<i class="mdi mdi-windows"></i> Win7';
         } else if (preg_match('/nt 6.2/i', $agent)) {
-            $os = '<i class="mdi mdi-windows"></i> Windows8';
+            $os = '<i class="mdi mdi-windows"></i> Win8';
         } else if(preg_match('/nt 6.3/i', $agent)) {
-            $os = '<i class="mdi mdi-windows"></i> Windows8.1';
+            $os = '<i class="mdi mdi-windows"></i> Win8.1';
         } else if(preg_match('/nt 5.1/i', $agent)) {
-            $os = '<i class="mdi mdi-windows-classic"></i> WindowsXP';
+            $os = '<i class="mdi mdi-windows-classic"></i> WinXP';
         } else if (preg_match('/nt 10.0/i', $agent)) {
-            $os = '<i class="mdi mdi-windows"></i> Windows10';
+            $os = '<i class="mdi mdi-windows"></i> Win10';
         } else{
-            $os = '<i class="mdi mdi-windows"></i> Windows';
+            $os = '<i class="mdi mdi-windows"></i> Win';
         }
     } else if (preg_match('/android/i', $agent)) {
 if (preg_match('/android 10/i', $agent)) {
@@ -511,6 +537,133 @@ function CountImg($obj) {
     $string_imgs = explode("$", $obj);
     $imgs = count($string_imgs) -1;
     return $imgs;
+}
+
+//表情解析
+function parsePaopaoBiaoqingCallback($match){
+        return '<img class="biaoqing" src="/usr/themes/Hello/assets/OwO/owo/paopao/'. str_replace('%', '', urlencode($match[1])) . '_2x.png">';
+    }
+function parseAruBiaoqingCallback($match){
+        return '<img class="biaoqing" src="/usr/themes/Hello/assets/OwO/owo/aru/'. str_replace('%', '', urlencode($match[1])) . '_2x.png">';
+    }
+function parseBiaoQing($content){
+        $content = preg_replace_callback('/\:\:\(\s*(呵呵|哈哈|吐舌|太开心|笑眼|花心|小乖|乖|捂嘴笑|滑稽|你懂的|不高兴|怒|汗|黑线|泪|真棒|喷|惊哭|阴险|鄙视|酷|啊|狂汗|what|疑问|酸爽|呀咩爹|委屈|惊讶|睡觉|笑尿|挖鼻|吐|犀利|小红脸|懒得理|勉强|爱心|心碎|玫瑰|礼物|彩虹|太阳|星星月亮|钱币|茶杯|蛋糕|大拇指|胜利|haha|OK|沙发|手纸|香蕉|便便|药丸|红领巾|蜡烛|音乐|灯泡|开心|钱|咦|呼|冷|生气|弱|吐血)\s*\)/is',
+'parsePaopaoBiaoqingCallback', $content);
+        $content = preg_replace_callback('/\:\@\(\s*(高兴|小怒|脸红|内伤|装大款|赞一个|害羞|汗|吐血倒地|深思|不高兴|无语|亲亲|口水|尴尬|中指|想一想|哭泣|便便|献花|皱眉|傻笑|狂汗|吐|喷水|看不见|鼓掌|阴暗|长草|献黄瓜|邪恶|期待|得意|吐舌|喷血|无所谓|观察|暗地观察|肿包|中枪|大囧|呲牙|抠鼻|不说话|咽气|欢呼|锁眉|蜡烛|坐等|击掌|惊喜|喜极而泣|抽烟|不出所料|愤怒|无奈|黑线|投降|看热闹|扇耳光|小眼睛|中刀)\s*\)/is',
+'parseAruBiaoqingCallback', $content);
+        return $content;
+    }
+
+// 文章目录
+function createCatalog($obj) {    //为文章标题添加锚点
+    global $catalog;
+    global $catalog_count;
+    $catalog = array();
+    $catalog_count = 0;
+    $obj = preg_replace_callback('/<h([1-6])(.*?)>(.*?)<\/h\1>/i', function($obj) {
+        global $catalog;
+        global $catalog_count;
+        $catalog_count ++;
+        $catalog[] = array('text' => trim(strip_tags($obj[3])), 'depth' => $obj[1], 'count' => $catalog_count);
+        return '<h'.$obj[1].$obj[2].'><a class="topmao" name="cl-'.$catalog_count.'"></a>'.$obj[3].'</h'.$obj[1].'>';
+    }, $obj);
+    return $obj;
+}
+
+function getCatalog() {    //输出文章目录容器
+    global $catalog;
+    $index = '';
+    if ($catalog) {
+        $index = '<ul class="toc-height">'."\n";
+        $prev_depth = '';
+        $to_depth = 0;
+        foreach($catalog as $catalog_item) {
+            $catalog_depth = $catalog_item['depth'];
+            if ($prev_depth) {
+                if ($catalog_depth == $prev_depth) {
+                    $index .= '</li>'."\n";
+                } elseif ($catalog_depth > $prev_depth) {
+                    $to_depth++;
+                    $index .= '<ul>'."\n";
+                } else {
+                    $to_depth2 = ($to_depth > ($prev_depth - $catalog_depth)) ? ($prev_depth - $catalog_depth) : $to_depth;
+                    if ($to_depth2) {
+                        for ($i=0; $i<$to_depth2; $i++) {
+                            $index .= '</li>'."\n".'</ul>'."\n";
+                            $to_depth--;
+                        }
+                    }
+                    $index .= '</li>';
+                }
+            }
+            $index .= '<li class="toc-ctrl"><a href="#cl-'.$catalog_item['count'].'">'.$catalog_item['text'].'</a>';
+            $prev_depth = $catalog_item['depth'];
+        }
+        for ($i=0; $i<=$to_depth; $i++) {
+            $index .= '</li>'."\n".'</ul>'."\n";
+        }
+    $index = '<div id="toc-container">'."\n".'<div id="toc">'."\n"."\n".$index.'</div>'."\n".'</div>'."\n";
+    }
+    echo $index;
+}
+function themeInit($archive) {
+    if ($archive->is('single')) {
+        $archive->content = createCatalog($archive->content);
+    }
+}
+
+// 发布文章数统计
+function echart_data($data_arr) {
+$data_arr = array_reverse($data_arr);
+$sarr=array();
+for($i=0;$i<count($data_arr);$i++){
+    $found = 0;
+    foreach((array)$sarr as $k=>$v){
+        if($data_arr[$i] == $v['key']){
+            $sarr[$k]['count'] += 1;
+            $found = 1;
+            continue;
+        }
+    }
+    if(!$found){
+        $sarr[] = array('key'=>$data_arr[$i],'count'=>1);
+    }
+}
+$date = '[';
+$num = '[';
+foreach ($sarr as $s){
+    $date .= "'".$s['key']."'".',';
+    $num .= $s['count'].',';
+}
+$date = substr($date,0,strlen($date)-1).']';
+$num = substr($num,0,strlen($num)-1).']';
+$earry = array();
+array_push($earry,$date,$num);
+return $earry;
+}
+
+// 随机颜色生成
+function SuijiColor($num,$range1,$range2){
+    $color = '';
+    for($i=0;$i<$num;$i++){
+        $color .= '"rgb('.rand($range1,$range2).','.rand($range1,$range2).','.rand($range1,$range2).')",';
+    }
+    $color = '['.substr($color,0,strlen($date)-1).']';
+    echo $color;
+}
+
+// 排序函数
+function quickSort($arr) {
+    $count = count($arr);
+    for ($i=1;$i<$count;$i++) {
+            $tmp = $arr[$i];
+            $j = $i - 1;
+            while ($j >= 0 && $tmp[1] > $arr[$j][1]) {
+                    $arr[$j+1] = $arr[$j--];
+            }
+            $arr[$j+1] = $tmp;
+    }
+    return $arr;
 }
 
 

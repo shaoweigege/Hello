@@ -1,17 +1,17 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 <?php Typecho_Widget::widget('Widget_Stat')->to($stat); ?>
 <div class="flex-right">
-					<div class="top-right">
-    					<div class="mainsearch">
-							<div class="form-group">
-					            <form id="search" class="wt-100" method="post" action="<?php $this->options->siteUrl(); ?>" role="search">
-					            	<div class="form-wrapper"><i class="fa fa-search" aria-hidden="true"></i></div>
-					                <input type="text" id="s" name="s" class="text" placeholder="<?php _e('请输入关键词并回车...'); ?>" />
-					            </form>
-				            </div>
-	    				</div>
-    				</div>
-	<div class="card-widget">
+	<div class="top-right">
+		<div class="mainsearch">
+			<div class="form-group">
+	            <form id="search" class="wt-100" method="post" action="<?php $this->options->siteUrl(); ?>" role="search">
+	            	<div class="form-wrapper"><i class="fa fa-search" aria-hidden="true"></i></div>
+	                <input type="text" id="s" name="s" class="text" placeholder="<?php _e('请输入关键词并回车...'); ?>" />
+	            </form>
+            </div>
+		</div>
+	</div>
+	    <div class="card-widget">
 		<div class="card-title"><i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp;&nbsp;关于博主</div>
 		<div class="card>">
 			<div class="card-info-avatar">
@@ -38,6 +38,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<div class="card-widget">
 		<div class="card-title"><i class="fa fa-line-chart" aria-hidden="true"></i>&nbsp;&nbsp;网站咨询</div>
 		<div class="card-ul">
@@ -53,6 +54,24 @@
 			</ul>
 		</div>
 	</div>
+	
+	<div class="card-widget">
+		<div class="card-title"><i class="fa fa-telegram" aria-hidden="true"></i>&nbsp;&nbsp;我的资源</div>
+		<div class="card-ul-1">
+			<ul>
+	    		<a href="http://zty.cqyes.cn/" target="_blank">
+	    		<li class="source-list hover-color" ><i class="fa  fa-location-arrow" aria-hidden="true"></i>&nbsp;&nbsp;<span class="source">南玖业务网</span></li></a>	
+	    		<a href="https://cloud.ztongyang.cn/cindex.html" target="_blank">
+	    		<li class="source-list hover-color" ><i class="fa  fa-location-arrow" aria-hidden="true"></i>&nbsp;&nbsp;<span class="source">南玖云盘</span></li></a>
+	    		<a href="http://ztyang.tzdsb.com/" target="_blank">
+	    		<li class="source-list hover-color" ><i class="fa  fa-location-arrow" aria-hidden="true"></i>&nbsp;&nbsp;<span class="source">南玖代刷网</span></li></a>
+	    		<li class="parse-video source-list hover-color" style="cursor: pointer;"><i class="fa  fa-location-arrow" aria-hidden="true"></i>&nbsp;&nbsp;<span class="source">南玖解析</span></li>
+	    		
+			</ul>
+		</div>
+	</div>
+	
+	
 		<div class="card-widget">
 		<div class="card-title"><i class="fa fa-book" aria-hidden="true"></i>&nbsp;&nbsp;热门文章</div>
 		<div class="card-ul">
@@ -91,28 +110,28 @@
 			</ul>
 		</div>
 	</div>
-	<div class="card-widget">
-		<div class="card-title"><i class="fa fa-folder-open" aria-hidden="true"></i>&nbsp;&nbsp;分类详情</div>
-		<div class="card-ul">
-			<ul>
-				<?php $obj = $this->widget('Widget_Metas_Category_List'); ?>
-				<?php if($obj->have()): ?>
-    			<?php while($obj->next()) : ?>
-    			<?php if(count($obj->children) == 0): ?>
-	    		<a href="<?php $obj->permalink(); ?>">
-	    		<li class="hover-color" ><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<?php $obj->name(); ?><span class="badge1"><?php $obj->levels(); ?></span></li></a>
-	        	<?php endif; ?>
-        		<?php endwhile; ?>
-				<?php else: ?>
-				<li>无分类</li>
-				<?php endif; ?>
-			</ul>
-		</div>
-	</div>
+	<!--<div class="card-widget">-->
+	<!--	<div class="card-title"><i class="fa fa-folder-open" aria-hidden="true"></i>&nbsp;&nbsp;分类详情</div>-->
+	<!--	<div class="card-ul">-->
+	<!--		<ul>-->
+	<!--			<?php $obj = $this->widget('Widget_Metas_Category_List'); ?>-->
+	<!--			<?php if($obj->have()): ?>-->
+ <!--   			<?php while($obj->next()) : ?>-->
+ <!--   			<?php if(count($obj->children) == 0): ?>-->
+	<!--    		<a href="<?php $obj->permalink(); ?>">-->
+	<!--    		<li class="hover-color" ><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;&nbsp;<?php $obj->name(); ?><span class="badge1"><?php $obj->levels(); ?></span></li></a>-->
+	<!--        	<?php endif; ?>-->
+ <!--       		<?php endwhile; ?>-->
+	<!--			<?php else: ?>-->
+	<!--			<li>无分类</li>-->
+	<!--			<?php endif; ?>-->
+	<!--		</ul>-->
+	<!--	</div>-->
+	<!--</div>-->
 	<div class="card-widget">	
 		<div class="card-title"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;&nbsp;标签云</div>
 		<div class="tag">
-			<?php $this->widget('Widget_Metas_Tag_Cloud', 'ignoreZeroCount=1&limit=30')->to($tags); ?>
+			<?php $this->widget('Widget_Metas_Tag_Cloud', 'ignoreZeroCount=1&limit=30')->to($tags);?>
 			<?php if($tags->have()): ?>			
 			<?php while($tags->next()): ?>
 			<span title="该标签下有<?php $tags->count(); ?>篇文章" class="tag-clould-color"  style="background-color:rgb(<?php echo(rand(150,255)); ?>,<?php echo(rand(150,255)); ?>,<?php echo(rand(150,255)); ?>)">
@@ -124,6 +143,7 @@
 			<?php endif; ?>
 		</div>
 	</div>
+	
 </div>
 
 

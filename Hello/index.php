@@ -9,6 +9,7 @@
  */
 
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
+ $lazyimg = $this->options->themeUrl.'/img/loading.gif';
  $this->need('header.php');
  ?>
  		<div id="m-cover-box">
@@ -73,7 +74,11 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 			<a href="<?php $article->permalink(); ?>">
 			<div class="cuo">
 				<div class="roof">
-					<img src="<?php echo showCover($article); ?>" alt="">
+				    <?php if($this->options->lazyload == 'Yes'):?>
+    					<img data-original="<?php echo showCover($article); ?>" src="<?php echo $lazyimg; ?>" alt="">
+    				<?php else: ?>
+                        <img src="<?php echo showCover($article); ?>" alt="">
+                    <?php endif; ?>
 					<span class="roof-title"><?php $article->title(); ?></span>
 				</div>
 			</div>
@@ -92,7 +97,14 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 		</div>
 		
 		<div class="m_recimg">
-			<a href="<?php $article->permalink(); ?>" style="background-image: url(<?php echo showCover($article); ?>);" class="wh-100"><i class="mask"></i><div class="m_title"><span class="m_badge">推荐</span><?php $article->title(); ?></div></a>
+			<a class="wh-100" href="<?php $article->permalink(); ?>" >
+			     <?php if($this->options->lazyload == 'Yes'):?>
+					<img class="wh-100" data-original="<?php echo showCover($article); ?>" src="<?php echo $lazyimg; ?>" />
+				<?php else: ?>
+                    <img class="wh-100" src="<?php echo showCover($article); ?>" />
+                <?php endif; ?>
+			    
+			    <i class="mask"></i><div class="m_title"><span class="m_badge">推荐</span><?php $article->title(); ?></div></a>
 		</div><?php } ?>
 		</div>
 
@@ -102,6 +114,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 		<div class="title"><div class="strong"><i class="line-lf"></i><b class="block-lf"></b><div>最新动态</div><b class="block-rt"></b><i class="line-rt"></i></div></div>
 		<div class="recent">
 			<?php $this->widget('Widget_Contents_Post_Recent','pageSize=10')->to($recent);
+			$lazyimg = $this->options->themeUrl.'/img/loading.gif';
 			if($recent->have()):
 			while($recent->next()):?>
 			<?php $img = showCover($recent);
@@ -110,7 +123,11 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 			<div class="post_card">
 				<div class="recent-left">
 					<a class="recent-content" href="<?php $recent->permalink();?>" />
+					    <?php if($this->options->lazyload == 'Yes'):?>
+					    <div class="recent-cover"><img data-original="<?php echo $img; ?>" src=<?php echo $lazyimg; ?>> alt="<?php $recent->title();?>"></div>
+					    <?php else: ?>
 						<div class="recent-cover"><img src="<?php echo $img; ?>" alt="<?php $recent->title();?>"></div>
+						<?php endif; ?>
 					</a>					
 				</div>
 				<div class="recent-right">
@@ -130,7 +147,13 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 			<div class="m_post_card">
 				<div class="index-card">
 					<div class="block-image">
-						<a class="bor" href="<?php $recent->permalink();?>" title="<?php $recent->title();?>" style="background-image: url(<?php echo $img; ?>);"></a>
+						<a class="bor" href="<?php $recent->permalink();?>" title="<?php $recent->title();?>" >
+						    <?php if($this->options->lazyload == 'Yes'): ?>
+						    <img class="wh-100" data-original="<?php echo $img; ?>" src="<?php echo $lazyimg; ?>"/>
+						    <?php else: ?>
+						    <img class="wh-100" src="<?php echo $img; ?>">
+						    <?php endif; ?>
+						</a>
 					</div>
 					<div class="r-layout">
 					<div class="entry-header">
@@ -148,23 +171,10 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
 		</div>
 	</div>
+	
 </div>
-	            	<script src="<?php $this->options->themeUrl('assets/js/typed.js'); ?>"></script>
-					<script>var typed_text = $(".typed-text").text();
-					typed_array = typed_text.split("\n");
-					var typed = new Typed("#typed", {
-					    strings: typed_array,
-					    startDelay: 300,
-					    typeSpeed: 250,
-					    loop: true,
-					    backSpeed: 100,
-					    directionNav: false,
-					    showCursor: false
-					});</script>
-            		<?php endif; ?>
-    				
-
-
-
+<script src="<?php $this->options->themeUrl('assets/js/typed.js'); ?>"></script>
+<script>var typed_text=$(".typed-text").text();typed_array=typed_text.split("\n");var typed=new Typed("#typed",{strings:typed_array,startDelay:300,typeSpeed:250,loop:true,backSpeed:100,directionNav:false,showCursor:false});</script>
+<?php endif; ?>
 <?php $this->need('sidebar.php'); ?>
 <?php $this->need('footer.php'); ?>

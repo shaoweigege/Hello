@@ -7,6 +7,7 @@
  */
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
  $this->need('header.php');
+ $lazyimg = $this->options->themeUrl.'/img/loading.gif';
 ?> 
 
 <div class="g-page">
@@ -47,7 +48,12 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 	$title = '<span style="color:#3d85d5db;display:contents;">['.$archives->categories[0][name].']&nbsp;&nbsp;</span>'.$archives->title;
 	$category = $archives->categories[0][name];
 	$n++; 
-	$output .= '<div class="g-item"><div class="g-day">'.$day.'</div><div class="g-img wh-100"><div class="g-item-body wh-100"><a href="'.$archives->permalink .'"><img src="'.showCover($archives).'" alt="'.$archives->title.'" ></a><div class="g-post"><a class="h-2x g-layout" href="'.$archives->permalink .'"><div class="g-content g-fly">'.$title.'</div></a><div class="g-content">'.$time.'</div></div></div></div></div>'; 
+	if($this->options->lazyload == 'Yes'){
+	    $g_img = '<img data-original="'.showCover($archives).'" src="'.$lazyimg.'" alt="'.$archives->title.'" >';
+	}else{
+	   	$g_img = '<img src="'.showCover($archives).'" alt="'.$archives->title.'" >';
+	}
+	$output .= '<div class="g-item"><div class="g-day">'.$day.'</div><div class="g-img wh-100"><div class="g-item-body wh-100"><a href="'.$archives->permalink .'">'.$g_img.'</a><div class="g-post"><a class="h-2x g-layout" href="'.$archives->permalink .'"><div class="g-content g-fly">'.$title.'</div></a><div class="g-content g-detail">'.$time.'</div></div></div></div></div>'; 
     endwhile;   
    $output .= '</div></div></div></div>';
     echo $output;  

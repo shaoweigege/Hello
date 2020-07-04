@@ -13,38 +13,27 @@
 			<script>$(function() {$(".flexslider").flexslider({animation: "fade", slideshow: true, slideshowSpeed: 7000, animationDuration: 600, touch: true,directionNav: true, });});</script>
 		</div>
 
-
-
 <div class="flex-left" id="main" role="main">
-	    		<div class="top">
-    				<?php if (!($this->options->typed_text == '')): ?>
-	            	<div class="description center-align">
-		                <span class="typed-text"><?php $this->options->typed_text(); ?></span>
-		                <span class="typed-cursor"><i style="color: #1689db;" class="fa fa-hand-o-up" aria-hidden="true"></i></span>&nbsp;&nbsp;<span id="typed"></span>&nbsp;&nbsp;<span class="typed-cursor"><i style="color: #1689db;" class="fa fa-hand-o-up" aria-hidden="true"></i></span>
-	            	</div>
-	            	<script src="<?php $this->options->themeUrl('assets/js/typed.js'); ?>"></script>
-					<script>var typed_text = $(".typed-text").text();
-					typed_array = typed_text.split("\n");
-					var typed = new Typed("#typed", {
-					    strings: typed_array,
-					    startDelay: 300,
-					    typeSpeed: 100,
-					    loop: true,
-					    backSpeed: 50,
-					    showCursor: true
-					});</script>
-            		<?php endif; ?>
-    			</div>
+<div class="top">
+<?php if (!($this->options->typed_text == '')): ?>
+<div class="description center-align">
+    <span class="typed-text"><?php $this->options->typed_text(); ?></span>
+    <span class="typed-cursor"><i style="color: #1689db;" class="fa fa-hand-o-up" aria-hidden="true"></i></span>&nbsp;&nbsp;<span id="typed"></span>&nbsp;&nbsp;<span class="typed-cursor"><i style="color: #1689db;" class="fa fa-hand-o-up" aria-hidden="true"></i></span>
+</div>
+<script src="<?php $this->options->themeUrl('assets/js/typed.js'); ?>"></script>
+<script>var typed_text=$(".typed-text").text();typed_array=typed_text.split("\n");var typed=new Typed("#typed",{strings:typed_array,startDelay:300,typeSpeed:100,loop:true,backSpeed:50,showCursor:true});</script>
+<?php endif; ?>
+</div>
 	<div id="cover-box">
 			<div class="flexslider wh-100">
 		        <ul class="slides wh-100"><li><img src="<?php echo showCover($this); ?>" ><span class="vcenter"><?php $this->title(); ?></span></li></ul>
 		    </div>
 		</div>
 	
-    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <article class="post">
 	    <h1 class="post-title" itemprop="name headline"><a class="in-post h-1x" itemprop="url" href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h1>
 	    <?php foreach ($this->tags as $tag): ?>
-	    <span class="post-tags tag-clould-color"  style="color:#000;background-color:rgb(<?php echo(rand(150,255)); ?>,<?php echo(rand(150,255)); ?>,<?php echo(rand(150,255)); ?>)"><?php echo $tag['name']; ?></span>
+	    <span class="post-tags head-post-tags"  style="color:#000;background-color:rgb(<?php echo(rand(150,255)); ?>,<?php echo(rand(150,255)); ?>,<?php echo(rand(150,255)); ?>)"><?php echo $tag['name']; ?></span>
 	    <?php endforeach;?>
 	        <ul class="post-meta post-ul">
 	            <li itemprop="author" itemscope itemtype="http://schema.org/Person"><i class="fa fa-address-book" aria-hidden="true"></i>&nbsp;<?php _e('作者: '); ?><a itemprop="name" href="<?php $this->author->permalink(); ?>" rel="author"><?php $this->author(); ?></a></li>
@@ -57,33 +46,60 @@
 	        <hr class="clearfix">
 	        <div class="tem markdown-body"><?php if($this->fields->indent == 'Yes'): ?>
 	        	<div class="post-content tem" itemprop="articleBody">
-	        	    <?php $this->content(); ?>
+	        	    <?php if($this->options->lazyload == 'Yes'){
+	        	    $lazyimg = $this->options->themeUrl.'/img/loading.gif';
+                    $content = preg_replace('#<img([^<>]*?)src=\"([^<>]*?)\"([^<>]*?)>#', "<a href=\"\$2\" data-fancybox=\"gallery\" /><img\$1data-original=\"\$2\" src=\"".$lazyimg."\"\$3></a>", $this->content,-1);
+                    echo $content;}else{
+                        $this->content();
+                    }
+                    ?>
 	        	</div>
-	        	<?php else: ?><div class="post-content distem" itemprop="articleBody"><?php $this->content(); ?></div><?php endif; ?>
-	        	<script>
-					var imgs = document.getElementsByClassName("post-content")[0].getElementsByTagName("img");
-					for(var i=0;i < imgs.length;i++){
-					imgs[i].setAttribute("class","img-zoomable");
-					}
-					var zooming = new Zooming({
-    					scaleBase: 1,
-    					bgColor: 'rgba(11, 8, 8, 0.8)',
-    					scaleExtra: 0.5
-    					
-					});
-					zooming.listen('.img-zoomable');
-				</script>
+
+	        	<?php else: ?><div class="post-content distem" itemprop="articleBody">
+	        	<?php if($this->options->lazyload == 'Yes'){
+	        	    $lazyimg = $this->options->themeUrl.'/img/loading.gif';
+                    $content = preg_replace('#<img([^<>]*?)src=\"([^<>]*?)\"([^<>]*?)>#', "<a href=\"\$2\" data-fancybox=\"gallery\" ><img\$1data-original=\"\$2\" src=\"".$lazyimg."\"\$3></a>", $this->content,-1);
+                    echo $content;}else{
+                        $this->content();
+                    }
+                    ?>
+                </div><?php endif; ?>
 	    	</div>
+    
     </article>
     <ul class="post-near">
         <li class="pre-post h-1x">上一篇: <?php $this->thePrev('%s','没有了'); ?></li>
         <li class="next-post h-1x">下一篇: <?php $this->theNext('%s','没有了'); ?></li>
     </ul>
     <?php $this->need('comments.php'); ?>
-
-
+    
+    <div id="toc-widget" class="toc-widget" style="display:none;">
+    	<div class="toc-card">	
+    		<div class="toc-title"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;&nbsp;文章目录</div>
+    		<?php getCatalog(); ?>
+    	</div>
+    </div>
+    
+    
+    <div id="m-toc-widget" class="m-toc rtoc">
+    	<div class="toc-card">	
+    		<div class="toc-title"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;&nbsp;文章目录</div>
+    		<?php getCatalog(); ?>
+    	</div>        
+    </div>
+<script>
+// 文章TOC块实现可拖拽
+$(document).ready(function(){var drafting=false;var offX,offY,mouseX,mouseY,winX,winY,x,y;$("#toc-widget").mousedown(function(event){event.stopPropagation();drafting=true});$(document).mousemove(function(event){event.stopPropagation();var e=event||window.event;mouseX=e.pageX||e.clientX+$(document).scrollLeft();mouseY=e.pageY||e.clientY+$(document).scrollTop();winX=$("#toc-widget").offset().left-$(document).scrollLeft();winY=$("#toc-widget").offset().top-$(document).scrollTop();if(drafting==false){offX=mouseX-winX;offY=mouseY-winY}x=mouseX-offX;y=mouseY-offY;$("#toc-widget").css({"left":x,"top":y})});$(document).mouseup(function(event){event.stopPropagation();drafting=false})});
+</script>    
 </div>
+
+
 
 <?php $this->need('sidebar.php'); ?>
 <?php $this->need('footer.php'); ?>
 <?php endif; ?>
+
+
+
+
+

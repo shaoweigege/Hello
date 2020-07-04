@@ -38,11 +38,11 @@
     <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/HLstyle/'.$this->options->HLstyle.'.css'); ?>">
     <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script type="text/javascript" charset="utf-8" src="https://upcdn.b0.upaiyun.com/libs/jquery/jquery-2.0.2.min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="https://www.mcheng.cn/wp-content/themes/b2/Assets/fontend/library/zooming.min.js?ver=2.1.0"></script>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.2/jquery.fancybox.min.css">
+<script src="https://cdn.staticfile.org/fancybox/3.5.2/jquery.fancybox.min.js"></script>
 	<script src="<?php $this->options->themeUrl('assets/js/jquery.flexslider-min.js'); ?>"></script>
 	<script src="<?php $this->options->themeUrl('assets/js/prism.js'); ?>"></script>
 	<script src="<?php $this->options->themeUrl('assets/js/clipboard.min.js'); ?>"></script>
-	<!--<script src="http://cdn.gqink.cn/layer/3.1.1/layer.js" type="text/javascript" charset="utf-8"></script>-->
 	<?php $this->options->tongji(); ?>
     <?php $this->header(); ?>
 	

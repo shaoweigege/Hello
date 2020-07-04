@@ -45,7 +45,7 @@ h6 {
 	margin:.7666666667rem 0 .46rem 0
 }
 .markdown-body p {
-    margin: 2px 2px 16px;
+    margin: 2px 2px;
     font-size: 0.9rem;
     line-height: 1.78rem;
     word-break: break-word;
@@ -68,9 +68,10 @@ h6 {
 	display:block;
 	margin:auto;
 	max-width:90%;
+	max-height: 800px;
 	height:auto;
 	cursor:pointer;
-	padding:1rem;
+	/*padding:1rem;*/
 }
 .markdown-body ol li {
 	list-style-type:decimal;
@@ -99,10 +100,10 @@ h6 {
 .markdown-body table th,table td {
 	font-size:1rem;
 	padding:5px 10px;
-	border:1px solid #eee;
+	border:1px solid rgba(255, 255, 255, 0.61);
 }
 .markdown-body table th {
-	background:#272822b0;
+	background:rgba(18, 19, 18, 0.8);
 }
 .markdown-body h1 {
 	font-size:1.85rem;
@@ -156,6 +157,10 @@ h6 {
 	background-color:#272821d1;
 	border-radius:2px;
 }
+blockquote pre code {
+    white-space: normal!important;
+    word-break: break-all!important;
+}
 .markdown-body [type="checkbox"]:not(:checked),[type="checkbox"]:checked {
 	position:inherit;
 	margin-left:-1.3rem;
@@ -184,7 +189,7 @@ h6 {
 @media screen and (max-width:767px) {
 		.markdown-body img {
 		max-width: 100%;
-		padding:1rem 0 0;
+		/*padding:1rem 0 0;*/
 		
 	}
 }

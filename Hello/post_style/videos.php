@@ -1,24 +1,25 @@
+
   <link class="dplayer-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
-  <!--<script src="https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js"></script>-->
+  <script src="https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/hls.js/dist/hls.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js"></script>
 
 <div class="flex-left" id="main" role="main">
 
 <?php $txt = $this->fields->videos;$video_arr = explode("\r\n", $txt);?>
-	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-	    <h1 class="post-title" itemprop="name headline"><a class="in-post h-1x" itemprop="url" href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h1>
+<div class="top-right"></div>
+	<article class="v-post" style="margin-bottom:1rem;" itemscope itemtype="http://schema.org/BlogPosting">
+	    <div class="video-head"><h1 class="post-title" itemprop="name headline"><a class="in-post h-1x" itemprop="url" href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h1>
 	        <ul class="post-meta post-ul" style="margin-top: 0.2rem;">
 	            <li><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;<?php _e('时间: '); ?><time datetime="<?php $this->date('c'); ?>" itemprop="datePublished"><?php $this->date(); ?></time></li>
 	            <li><i class="fa fa-eye fs-16" aria-hidden="true"></i>&nbsp;<?php _e('浏览: '); ?><?php get_post_view($this); ?></li>
 	            <li><i class="fa fa-commenting" aria-hidden="true">&nbsp;</i> <?php _e('评论: '); ?><?php $this->commentsNum(); ?></li>
 	            <?php foreach ($this->tags as $tag): ?>
-	    <span class="post-tags tag-clould-color"  style="color:#000;background-color:rgb(<?php echo(rand(150,255)); ?>,<?php echo(rand(150,255)); ?>,<?php echo(rand(150,255)); ?>)"><?php echo $tag['name']; ?></span>
+	    <span class="post-tags head-post-tags"  style="color:#000;background-color:rgb(<?php echo(rand(150,255)); ?>,<?php echo(rand(150,255)); ?>,<?php echo(rand(150,255)); ?>)"><?php echo $tag['name']; ?></span>
 	    <?php endforeach;?>
 	        </ul>
-	        
-	    
 		<div id="dplayer" play-url="<?php echo explode('$',$video_arr[0])[1]; ?>"></div>
+		</div>
 		<script>
 			const dp = new DPlayer({
 				container: document.getElementById('dplayer'),
@@ -43,11 +44,25 @@
 
 			</script>
     </article>
-
+<div class="m-card-widget m-video">
+		<div class="card-title"><i class="fa fa-video-camera" aria-hidden="true"></i>&nbsp;&nbsp;剧集</div>
+		<div class="card>">
+			<div class="v-list-box">
+				<div class="card-ul scroll_wrap">
+					<ul class="v-list">
+					    <?php $txt = $this->fields->videos;$video_arr = explode("\r\n", $txt);?>
+					    <?php foreach ($video_arr as $video): ?>
+					    <li><span class="button play" data-url="<?php echo(explode("$", $video)[1]); ?>"><?php echo(explode("$", $video)[0]); ?></span></li>
+					    <?php endforeach;?>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 	    <h1 class="post-title">视频简介</h1>
 	    <?php if(showSummary($this)[0] == 0){$summary = $this->description;}else{$summary = showSummary($this)[1];}?>
-	    <div class="v-summary"><?php if($this->category == 'gallery'){echo showSummary($this)[1];}else{echo $summary;} ?></div>
+	    <div class="m-v-summary v-summary"><?php if($this->category == 'gallery'){echo showSummary($this)[1];}else{echo $summary;} ?></div>
 
 	    
 	    

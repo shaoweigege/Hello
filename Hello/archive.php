@@ -26,6 +26,7 @@ class Typecho_Widget_Helper_PageNavigator_Classic extends Typecho_Widget_Helper_
         }
     }
 }
+ $lazyimg = $this->options->themeUrl.'/img/loading.gif';
 ?>
 
 
@@ -48,13 +49,20 @@ class Typecho_Widget_Helper_PageNavigator_Classic extends Typecho_Widget_Helper_
 				<a href="<?php $this->permalink(); ?>" title="<?php $this->title() ?>">
 				<div class="a-post">
 					<div class="c-img">
-						<img class="wh-100" src="<?php echo showCover($this); ?>">
+						
+						<?php if($this->options->lazyload == 'Yes'):?>
+							<img class="wh-100" data-original="<?php echo showCover($this); ?>" src="<?php echo $this->options->themeUrl.'/img/loading.gif' ?>" />
+	    				<?php else: ?>
+	    					<img class="wh-100" src="<?php echo showCover($this); ?>">
+	                    <?php endif; ?>
+						
+						
 						<?php if($this->category == "gallery"): ?>
 						<span class="item-num">[<?php echo CountImg($this->content); ?>P]</span>
 						<?php endif; ?>
 						<div class="a-title"><span class="h-1x"><?php $this->title() ?></span></div></div>
 					<?php if(showSummary($this)[0] == 0){$summary = $this->description;}else{$summary = showSummary($this)[1];}?>
-					<div class="wt-100">
+					<div class="awd wt-100">
 						<div class="c-detail">
 							<div class="a-summary"><span class="h-2x"><?php if($this->category == 'gallery'){echo showSummary($this)[1];}else{echo $summary;} ?></span></div>
 							<div class="a-bottom">
@@ -68,6 +76,23 @@ class Typecho_Widget_Helper_PageNavigator_Classic extends Typecho_Widget_Helper_
 					</div>
 				</div>
 				</a>
+			</div>
+			<div class="m_archive_card">
+				<div class="index-card">
+					<div class="archive-block-image">
+						<a class="bor" href="<?php $this->permalink();?>" title="<?php $this->title();?>" ><img class="wh-100" data-original="<?php echo showCover($this); ?>" src="<?php echo $lazyimg; ?>"> </a>
+					</div>
+					<div class="r-layout">
+					<div class="entry-header">
+						<a href="<?php $this->permalink();?>"><span class="h-2x"><span class="m_badge "><?php echo $this->categories[0][name]; ?></span><?php $this->title();?></span></a>
+					</div>
+					<div class="cbottom">
+						<span datetime="<?php $this->date(); ?>"><i class="fa fa-clock-o">&nbsp;</i><i><?php $this->date(); ?></i></span>
+						<span><i class="fa fa-eye fs-16"></i>&nbsp;<i><?php get_post_view($this); ?></i></span>
+						<span><i class="fa fa-commenting"></i>&nbsp;<i><?php $this->commentsNum(); ?></i></span>
+					</div>
+					</div>
+				</div>
 			</div>
 	    	<?php endwhile; ?>
 	    	

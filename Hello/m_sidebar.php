@@ -44,7 +44,16 @@
 					<li class="list_style"><a class="whb" href="<?php $pages->permalink(); ?>" ><?php $pages->title(); ?></a></li>
 					<?php endif; ?><?php endwhile; ?>
                  	</ul></nav></nav>
-                 	
+
+             <nav class="m_menu_list wh-100"><div class="side-card-widget"><div class="side-card-title"><i class="fa fa-telegram" aria-hidden="true"></i>&nbsp;&nbsp;我的资源</div><nav class="menu">
+        			<ul class="side_ul">
+        	    		<li class="list_style2" class="source-list hover-color" ><i class="fa  fa-location-arrow" aria-hidden="true"></i>&nbsp;&nbsp;<a href="http://zty.cqyes.cn/" target="_blank"><span >南玖业务网</span></a></li>	
+        	    		<li class="list_style2" class="source-list hover-color" ><i class="fa  fa-location-arrow" aria-hidden="true"></i>&nbsp;&nbsp;<a href="https://cloud.ztongyang.cn/cindex.html" target="_blank"><span >南玖云盘</span></a></li>
+        	    		<li class="list_style2" class="source-list hover-color" ><i class="fa  fa-location-arrow" aria-hidden="true"></i>&nbsp;&nbsp;<a href="http://ztyang.tzdsb.com/" target="_blank"><span >南玖代刷网</span></a></li>
+        	    		<li class="parse-video list_style2" class="source-list hover-color" style="cursor: pointer;"><i class="fa  fa-location-arrow" aria-hidden="true"></i>&nbsp;&nbsp;<span>南玖解析</span></li>
+        			</ul>
+        	</nav></nav>
+                 	                	
                  	
                  	<nav class="m_menu_list wh-100"><div class="side-card-widget"><div class="side-card-title"><i class="fa fa-line-chart" aria-hidden="true"></i>&nbsp;&nbsp;网站咨询</div><nav class="menu">
             <ul class="side_ul">
@@ -57,6 +66,8 @@
 				<li class="list_style2"><i class="fa fa-hand-o-right" aria-hidden="true"></i>&nbsp;&nbsp;运行时间<span class="m-badge"><?php echo getBuildTime()[1]; ?></span></li>
 			</ul>
                 </nav></div></nav>
+                 	
+
                  	
             <nav class="m_menu_list wh-100"><div class="side-card-widget"><div class="side-card-title"><i class="fa fa-book" aria-hidden="true"></i>&nbsp;&nbsp;热门文章</div><nav class="menu">
             <ul class="side_ul">
@@ -100,6 +111,7 @@
    </div>
    </div>
 </div></div>
+
  
 <div id="overlay" class="overlay wh-100" style="display: none; opacity: 0;"></div>
 			

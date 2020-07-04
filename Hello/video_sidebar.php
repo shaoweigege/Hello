@@ -44,7 +44,7 @@
 	</div>
 	
 	<div class="card-widget">	
-		<div class="card-title"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;&nbsp;视频标签</div>
+		<div class="card-title"><i class="fa fa-tags" aria-hidden="true"></i>&nbsp;&nbsp;标签云</div>
 		<div class="tag">
 			<?php $this->widget('Widget_Metas_Tag_Cloud', 'type=category&ignoreZeroCount=1&limit=30','mid=109')->to($tags); ?>
 			<?php if($tags->have()): ?>			
